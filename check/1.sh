@@ -22,7 +22,7 @@ echo '3 создание разделов'
  echo;
  echo;
  echo +5G;
- echo;
+ echo t;
  echo 19;
 
  echo n;
