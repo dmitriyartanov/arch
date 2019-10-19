@@ -15,22 +15,25 @@ echo '3 создание разделов'
  echo;
  echo;
  echo +512M;
- echo y;
  echo t;
  echo 1;
 
  echo n;
  echo;
  echo;
- echo +10G;
- echo y;
+ echo +5G;
+ echo;
+ echo 19;
 
+ echo n;
+ echo;
+ echo;
+ echo +10G;
 
  echo n;
  echo;
  echo;
  echo;
- echo y;
 
  echo w;
 ) | fdisk /dev/sda
