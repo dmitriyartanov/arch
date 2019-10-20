@@ -52,7 +52,7 @@ echo 'Include = /etc/pacman.d/mirrorlist' >> /etc/pacman.conf
 pacman -Syy
 
 echo '2.14 Ставим иксы и драйвера'
-pacman -S xorg-server xorg-drivers xorg-xinit
+pacman -S xorg-server xorg-drivers xorg-xinit xf86-video-amdgpu
 
 echo "2.15 Ставим XFCE"
 pacman -S xfce4 xfce4-goodies --noconfirm

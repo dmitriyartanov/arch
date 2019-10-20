@@ -1,19 +1,24 @@
 #!/bin/bash
 rm -rf ~/.config/xfce4/*
-mkdir ~/downloads
-cd ~/downloads
 
-echo 'Установка AUR (yay)'
+mkdir ~/builds
+cd ~/builds
+
+echo '3.1 Установка AUR (yay)'
 sudo pacman -Syu
-sudo pacman -S wget --noconfirm
-wget git.io/yay-install.sh && sh yay-install.sh --noconfirm
+sudo pacman -S --noconfirm --needed wget curl git
+git clone https://aur.archlinux.org/yay-bin.git
+cd yay-bin
+makepkg -si --skipinteg
+cd ..
+rm -rf yay-bin
 
-echo 'Создаем нужные директории'
+echo '3.2 Создаем нужные директории'
 sudo pacman -S xdg-user-dirs --noconfirm
 xdg-user-dirs-update
 
-echo 'Установка программ'
-sudo pacman -S firefox firefox-i18n-ru ufw f2fs-tools dosfstools ntfs-3g alsa-lib alsa-utils file-roller p7zip unrar gvfs aspell-ru pulseaudio pavucontrol --noconfirm
+echo '3.3 Установка программ'
+sudo pacman -S firefox firefox-i18n-ru ufw f2fs-tools dosfstools ntfs-3g alsa-lib alsa-utils file-roller p7zip unrar gvfs aspell-ru pulseaudio pavucontrol exfat-utils --noconfirm
 
 echo 'Установить рекомендумые программы?'
 read -p "1 - Да, 0 - Нет: " prog_set
@@ -42,12 +47,12 @@ if [[ $xfce_set == 1 ]]; then
   
   echo 'Ставим лого ArchLinux в меню'
   wget git.io/arch_logo.png
-  sudo mv -f ~/downloads/arch_logo.png /usr/share/pixmaps/arch_logo.png
+  sudo mv -f ~/builds/arch_logo.png /usr/share/pixmaps/arch_logo.png
 
   echo 'Ставим обои на рабочий стол'
   wget git.io/bg.jpg
   sudo rm -rf /usr/share/backgrounds/xfce/* #Удаляем стандартрые обои
-  sudo mv -f ~/downloads/bg.jpg /usr/share/backgrounds/xfce/bg.jpg
+  sudo mv -f ~/builds/bg.jpg /usr/share/backgrounds/xfce/bg.jpg
 elif [[ $xfce_set == 0 ]]; then
   echo 'Установка конфигов XFCE пропущена.'
 fi 
@@ -78,7 +83,7 @@ sudo ufw enable
 echo 'Добавляем в автозагрузку:'
 sudo systemctl enable ufw
 
-sudo rm -rf ~/downloads
+sudo rm -rf ~/builds
 sudo rm -rf ~/archuefi3.sh
 
 echo 'Установка завершена!'
