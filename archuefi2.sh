@@ -65,12 +65,20 @@ echo '2.17 Ставим шрифты'
 pacman -S ttf-liberation ttf-dejavu --noconfirm 
 
 echo '2.18 Ставим сеть'
+systemctl enable dhcpcd
 pacman -S networkmanager network-manager-applet ppp --noconfirm
 
 echo '2.19 Подключаем автозагрузку менеджера входа и интернет'
 systemctl enable NetworkManager
 
-echo 'Установка завершена! Перезагрузите систему.'
-echo 'Если хотите подключить AUR, установить мои конфиги XFCE, тогда после перезагрзки и входа в систему, установите wget (sudo pacman -S wget) и выполните команду:'
-echo 'wget git.io/archuefi3.sh && sh archuefi3.sh'
+wget https://raw.githubusercontent.com/dmitriyartanov/arch/master/archuefi3.sh -O /home/$username/archuefi3.sh
+
+echo 'Установка завершена!'
+echo 'После перезагрзки и входа в систему, выполните команду:'
+echo '$ sh ./archuefi3.sh'
+
 exit
+
+umount -R /mnt
+
+reboot

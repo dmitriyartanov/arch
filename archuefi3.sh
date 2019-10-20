@@ -1,5 +1,4 @@
 #!/bin/bash
-rm -rf ~/.config/xfce4/*
 
 mkdir ~/builds
 cd ~/builds
@@ -18,63 +17,16 @@ sudo pacman -S xdg-user-dirs --noconfirm
 xdg-user-dirs-update
 
 echo '3.3 Установка программ'
-sudo pacman -S firefox firefox-i18n-ru ufw f2fs-tools dosfstools ntfs-3g alsa-lib alsa-utils file-roller p7zip unrar gvfs aspell-ru pulseaudio pavucontrol exfat-utils --noconfirm
+sudo pacman -S firefox firefox-i18n-ru ufw f2fs-tools dosfstools ntfs-3g alsa-lib alsa-utils file-roller p7zip unrar gvfs aspell-ru pulseaudio pavucontrol exfat-utils redshift --noconfirm
 
 echo '3.4 Установка дополнительных программ'
-sudo pacman -S recoll vlc freemind filezilla gimp libreoffice libreoffice-fresh-ru kdenlive audacity screenfetch qbittorrent galculator --noconfirm
-yay -S flameshot-git redshift sublime-text-dev hunspell-ru --noconfirm
-
-
-echo '3.5 Качаем и устанавливаем настройки Xfce'
-# Чтобы сделать копию ваших настоек XFCE перейдите в домашнюю директорию ~/username открйте в этой категории терминал и выполните команду ниже.
-# tar -czf xfce4.tar.gz .config/xfce4
-# Выгрузите архив в интернет и скорректируйте ссылку на XFCE файл заменив ссылку на свою.
-# wget git.io/xfce4.tar.gz
-wget https://github.com/ordanax/arch/raw/master/attach/xfce4.tar.gz
-sudo rm -rf ~/.config/xfce4/panel/
-sudo rm -rf ~/.config/xfce4/*
-sudo tar -xzf xfce4.tar.gz -C ~/
-echo 'Установка тем'
-yay -S osx-arc-shadow papirus-maia-icon-theme-git breeze-default-cursor-theme --noconfirm
-sudo pacman -S capitaine-cursors
-
-echo 'Ставим лого ArchLinux в меню'
-wget git.io/arch_logo.png
-sudo mv -f ~/builds/arch_logo.png /usr/share/pixmaps/arch_logo.png
-
-echo 'Ставим обои на рабочий стол'
-wget git.io/bg.jpg
-sudo rm -rf /usr/share/backgrounds/xfce/* #Удаляем стандартрые обои
-sudo mv -f ~/builds/bg.jpg /usr/share/backgrounds/xfce/bg.jpg
-
-  
-echo 'Убираем меню граб для выбора системы?'
-read -p "1 - Да, 0 - Нет: " grub_set
-if [[ $grub_set == 1 ]]; then
-  wget git.io/grub.tar.gz
-  sudo tar -xzf grub.tar.gz -C ~/
-  sudo grub-mkconfig -o /boot/grub/grub.cfg
-elif [[ $grub_set == 0 ]]; then
-  echo 'Пропускаем.'
-fi
-
-echo 'Установить conky?'
-read -p "1 - Да, 0 - Нет: " conky_set
-if [[ $conky_set == 1 ]]; then
-  sudo pacman -S conky conky-manager --noconfirm
-  wget git.io/conky.tar.gz
-  tar -xzf conky.tar.gz -C ~/
-elif [[ $conky_set == 0 ]]; then
-  echo 'Установка conky пропущена.'
-fi
+sudo pacman -S recoll vlc smplayer freemind filezilla gimp gimp-nufraw geeqie libreoffice libreoffice-fresh-ru kdenlive audacity screenfetch transmission-gtk galculator klavaro calibre solaar --noconfirm
+yay -S flameshot-git sublime-text-dev hunspell-ru google-chrome skypeforlinux-stable-bin --noconfirm
 
 echo 'Включаем сетевой экран'
 sudo ufw enable
 
 echo 'Добавляем в автозагрузку:'
 sudo systemctl enable ufw
-
-sudo rm -rf ~/builds
-sudo rm -rf ~/archuefi3.sh
 
 echo 'Установка завершена!'
