@@ -71,10 +71,10 @@ pacman -S networkmanager network-manager-applet ppp --noconfirm
 echo '2.19 Подключаем автозагрузку менеджера входа и интернет'
 systemctl enable NetworkManager
 
-wget https://raw.githubusercontent.com/dmitriyartanov/arch/master/archuefi3.sh -O /home/$username/archuefi3.sh
+curl -fsSL https://raw.githubusercontent.com/dmitriyartanov/arch/master/archuefi3.sh > /home/$username/archuefi3.sh
 
 echo 'Установка завершена!'
-echo 'После перезагрзки и входа в систему, выполните команду:'
+echo 'После перезагрзки и входа в систему как пользователь, выполните команду:'
 echo '$ sh ./archuefi3.sh'
 
 exit
